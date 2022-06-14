@@ -7,82 +7,156 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-
-            app:toolbarId="@+id/toolbar">
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".Chat_Page">
+            android:layout_height="92dp"
+            android:background="#F44336"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:longClickable="false"
+                android:background="@drawable/rounded_corner"
+                android:shape="ring"
+                android:inner_radius="30dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                android:layout_height="275dp"
-                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                <TextView
+                    android:id="@+id/Name_contact_chat_page"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+                    android:layout_height="wrap_content"
+                    android:text="Name Name"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                <TextView
+                    android:id="@+id/lastseen_chat_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="590dp"
+            android:background="#00BCD4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_corner"
 
-                    <EditText
-                        android:id="@+id/editTextTextPersonName2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
+                    android:backgroundTint="#FFC107"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="100">
 
-                    <Button
-                        android:id="@+id/button2"
+                    <TextView
+                        android:id="@+id/textView5"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="message_sent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/time_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
-                        android:text="send"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textSize="11dp" />
+                        android:padding="10dp"
+                        android:text="TextView"
+
+                        android:textColor="#888888" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rounded_corner"
+                    android:backgroundTint="#3F51B5"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="100">
+
+                    <TextView
+                        android:id="@+id/time_message_l"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="TextView"
+
+
+                        android:textColor="#888888" />
+
+                    <TextView
+                        android:id="@+id/textView5_l"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="message_sent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            >
 
-    </androidx.core.widget.NestedScrollView>
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="send"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
