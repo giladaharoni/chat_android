@@ -1,8 +1,12 @@
 package viewmodels;
 
-import java.util.Date;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+@Entity
 public class message {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String content;
     private Date created;
@@ -14,6 +18,13 @@ public class message {
 
     public Date getCreated() {
         return created;
+    }
+
+    public message(int id, String content, Date created, boolean sent) {
+        this.id = id;
+        this.content = content;
+        this.created = created;
+        this.sent = sent;
     }
 
     public boolean isSent() {

@@ -11,14 +11,14 @@ import android.os.Bundle;
 import java.util.Observer;
 
 public class Converstaions_List extends AppCompatActivity {
+
     private contact_viewmodel viewmodel_contacts;
 
         @Override
      protected void onCreate(Bundle savedInstanceState) {
-            viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
+        viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converstaions_list);
-            viewmodel_contacts.getContacts().observe(this, contacts -> getSupportActionBar());
 
     }
 }

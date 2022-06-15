@@ -1,8 +1,12 @@
 package viewmodels;
 
-import java.util.Date;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+@Entity
 public class contact {
+    @PrimaryKey(autoGenerate = true)
     private String id;
     private String name;
     private String server;
