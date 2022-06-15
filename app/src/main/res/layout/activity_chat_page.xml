@@ -58,10 +58,11 @@
             android:layout_width="match_parent"
             android:layout_height="590dp"
             android:background="#00BCD4">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messages"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent" />
         </ScrollView>
 
         <LinearLayout

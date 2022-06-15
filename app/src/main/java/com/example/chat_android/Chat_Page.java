@@ -17,15 +17,18 @@ public class Chat_Page extends AppCompatActivity {
     public List<message> messages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat_page);
         messages = new ArrayList<>();
         messages.add(new message(1,"hi", new Date(),true));
         messages.add(new message(2,"hello", new Date(),false));
+        messages.add(new message(3,"hesd", new Date(),false));
         RecyclerView lstMessage = findViewById(R.id.messages);
         final message_adapter message_adapter = new message_adapter(this);
         lstMessage.setAdapter(message_adapter);
         lstMessage.setLayoutManager(new LinearLayoutManager(this));
         message_adapter.setMessages(messages);
-        setContentView(R.layout.activity_chat_page);
+
     }
 }

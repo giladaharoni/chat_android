@@ -46,7 +46,7 @@ public class message_adapter extends RecyclerView.Adapter<message_adapter.messag
 
     @Override
     public int getItemCount() {
-        return 0;
+        return messages.size();
     }
 
     class messageViewHolder extends RecyclerView.ViewHolder {
