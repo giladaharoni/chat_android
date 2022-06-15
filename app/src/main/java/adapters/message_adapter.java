@@ -26,13 +26,21 @@ public class message_adapter extends RecyclerView.Adapter<message_adapter.messag
     @Override
     public messageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if(messages.get(viewType).isSent() == true) {
+        if(viewType == 1) {
             view = inflater.inflate(R.layout.messagesent_layout,parent,false);
         }
         else {
             view = inflater.inflate(R.layout.messagerecived_layout,parent,false);
         }
         return new messageViewHolder(view);
+    }
+    @Override
+    public int getItemViewType(int position) {
+        if(messages.get(position).isSent()) {
+            return 1;
+        }
+        else
+            return 0;
     }
 
     @Override
