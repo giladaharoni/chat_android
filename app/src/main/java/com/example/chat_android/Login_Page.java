@@ -18,8 +18,9 @@ public class Login_Page extends AppCompatActivity {
         TextView nickname = findViewById(R.id.nickname);
         TextView password = findViewById(R.id.login_password);
         Button registerLink = findViewById(R.id.register_link);
+
         login.setOnClickListener(v->{
-            Intent i = new Intent(this, Converstaions_List.class);
+            Intent i = new Intent(this, Chat_Page.class);
             startActivity(i);
 
         });

@@ -25,7 +25,7 @@ public class message_adapter extends RecyclerView.Adapter<message_adapter.messag
     @NonNull
     @Override
     public messageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view
+        View view;
         if(messages.get(viewType).isSent() == true) {
             view = inflater.inflate(R.layout.messagesent_layout,parent,false);
         }
