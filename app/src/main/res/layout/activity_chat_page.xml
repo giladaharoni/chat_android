@@ -23,10 +23,11 @@
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:longClickable="false"
                 android:background="@drawable/rounded_corner"
-                android:shape="ring"
                 android:inner_radius="30dp"
+                android:longClickable="false"
+                android:shape="ring"
+                tools:ignore="SpeakableTextPresentCheck"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
