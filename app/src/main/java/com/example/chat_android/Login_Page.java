@@ -20,7 +20,7 @@ public class Login_Page extends AppCompatActivity {
         Button registerLink = findViewById(R.id.register_link);
 
         login.setOnClickListener(v->{
-            Intent i = new Intent(this, Chat_Page.class);
+            Intent i = new Intent(this, Converstaions_List.class);
             startActivity(i);
 
         });

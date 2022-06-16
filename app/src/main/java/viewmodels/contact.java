@@ -13,6 +13,14 @@ public class contact {
     private String last;
     private Date lastDate;
 
+    public contact(String id, String name, String server, String last, Date lastDate) {
+        this.id = id;
+        this.name = name;
+        this.server = server;
+        this.last = last;
+        this.lastDate = lastDate;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
