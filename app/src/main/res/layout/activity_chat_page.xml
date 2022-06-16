@@ -57,6 +57,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="590dp"
+            android:layout_gravity="end"
             android:background="#00BCD4">
 
             <androidx.recyclerview.widget.RecyclerView

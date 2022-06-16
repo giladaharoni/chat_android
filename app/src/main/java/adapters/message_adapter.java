@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chat_android.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +47,12 @@ public class message_adapter extends RecyclerView.Adapter<message_adapter.messag
     @Override
     public void onBindViewHolder(@NonNull messageViewHolder holder, int position) {
         if(messages != null) {
+            String pattern = " HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
             final message current = messages.get(position);
             holder.content.setText(current.getContent());
-            holder.time.setText(current.getCreated().toString());
+            holder.time.setText(simpleDateFormat.format(current.getCreated()));
         }
     }
 
