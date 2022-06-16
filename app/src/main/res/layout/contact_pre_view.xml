@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="100dp"
+    >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:backgroundTint="#FFC107">
 
         <ImageView
 
@@ -23,27 +27,31 @@
             <TextView
                 android:id="@+id/contact_name_conversation"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
-                android:text="contact name" />
+                android:text="contact name"
+                android:textSize="20dp" />
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/last_m"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/lastm"
+                    android:layout_width="121dp"
+                    android:layout_marginTop="33dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:text="last_message"
                     tools:ignore="last_message_conv" />
 
                 <TextView
                     android:id="@+id/time_conv"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_marginTop="23dp"
+
+                    android:layout_height="43dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="12:20" />

@@ -26,11 +26,15 @@
             android:background="#706B6B">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/contact_list">
+                android:id="@+id/contacts"
+                android:layout_marginBottom="6dp"
 
-            </androidx.recyclerview.widget.RecyclerView>
+                android:background="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:minHeight="590dp"
+                />
+
 
         </ScrollView>
 

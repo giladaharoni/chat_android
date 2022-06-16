@@ -14,23 +14,20 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import viewmodels.contact;
+import viewmodels.message;
 
 public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.contactsViewHolder> {
 
     private final LayoutInflater inflater;
-
-    public void setContacts(List<contact> contacts) {
-        this.contacts = contacts;
-        notifyDataSetChanged();
-    }
-
     private List<contact> contacts;
     public contacts_adapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
+
+
     @NonNull
     @Override
-    public contacts_adapter.contactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public contactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new contactsViewHolder(inflater.inflate(R.layout.contact_pre_view,parent,false));
     }
 
@@ -60,7 +57,12 @@ public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.cont
             super(itemView);
             name = itemView.findViewById(R.id.contact_name_conversation);
             time = itemView.findViewById(R.id.time_conv);
-            lastMessage = itemView.findViewById(R.id.last_m);
+            lastMessage = itemView.findViewById(R.id.lastm);
         }
     }
+    public void setContacts(List<contact> contacts) {
+        this.contacts = contacts;
+        notifyDataSetChanged();
+    }
+
 }
