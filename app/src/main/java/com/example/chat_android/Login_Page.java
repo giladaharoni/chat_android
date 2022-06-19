@@ -24,11 +24,10 @@ public class Login_Page extends AppCompatActivity {
         Button registerLink = findViewById(R.id.register_link);
 
         login.setOnClickListener(v->{
-            if (service.login("didi","1")) {
+            if (service.login("do","1", this)) {
                 Intent i = new Intent(this, Converstaions_List.class);
                 startActivity(i);
             }
-
 
         });
         registerLink.setOnClickListener(v->{

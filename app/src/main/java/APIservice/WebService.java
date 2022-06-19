@@ -1,7 +1,10 @@
 package APIservice;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.chat_android.Converstaions_List;
 import com.example.chat_android.R;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import viewmodels.contact;
+
 
 public class WebService {
     Retrofit retrofit;
@@ -43,7 +47,8 @@ public class WebService {
         });
     }
 
-    public boolean login(String name,String password){
+    public boolean login(String name, String password, Context login){
+        // call -> async
         Call<Void> call = webApi.login(name, password);
         final boolean[] isLogin = {false};
         call.enqueue(new Callback<Void>() {
@@ -51,12 +56,16 @@ public class WebService {
 
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                //when the request http succeed
                 Log.d(TAG, "onResponse: "+response.message());
+                Intent i = new Intent(login, Converstaions_List.class);
+                login.startActivity(i);
                 isLogin[0] = true;
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                //when the request http failed
                 Log.d(TAG, "onResponse: ");
                 isLogin[0] = false;
             }
