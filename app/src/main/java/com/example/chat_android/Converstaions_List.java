@@ -10,15 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import viewmodels.contact;
 //import viewmodels.contact_viewmodel;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observer;
 
-public class Converstaions_List extends AppCompatActivity {
+public class Converstaions_List extends AppCompatActivity implements contacts_adapter.OnContactClickListener {
 
+    private static final String TAG = "conv:";
     //private contact_viewmodel viewmodel_contacts;
     private List<contact> contacts;
 
@@ -33,9 +37,21 @@ public class Converstaions_List extends AppCompatActivity {
         contacts.add(new contact("34", "didi", "5", "kkkkk", new Date()));
 
         RecyclerView lstContact = findViewById(R.id.contacts);
-        final contacts_adapter contacts_adapter = new contacts_adapter(this);
+        final contacts_adapter contacts_adapter = new contacts_adapter(this,this);
         lstContact.setAdapter(contacts_adapter);
         lstContact.setLayoutManager(new LinearLayoutManager(this));
         contacts_adapter.setContacts(contacts);
+    }
+
+    @Override
+    public void onContactClick(int position) {
+
+        Intent intent = new Intent(this,Chat_Page.class);
+        contact con =contacts.get(position);
+        //Log.d(TAG, "onContactClick: "+ID);
+        intent.putExtra("id",con.getId());
+        intent.putExtra("name",con.getName());
+        intent.putExtra("last_date",con.getLastDate());
+        startActivity(intent);
     }
 }
