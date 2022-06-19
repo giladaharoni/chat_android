@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">chat!android</string>
+    <string name="base_url">http://10.0.2.2:7125</string>
 </resources>

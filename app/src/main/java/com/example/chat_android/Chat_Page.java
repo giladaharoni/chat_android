@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,7 +23,8 @@ public class Chat_Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        contact = new contact((String)savedInstanceState.get("id"),(String)savedInstanceState.get("name"),"","",(Date) savedInstanceState.get("last_date"));
+        Intent i = getIntent();
+        contact = new contact((String) i.getExtras().get("id"),(String) i.getExtras().get("name"),"","",(Date) i.getExtras().get("last_date"));
         setContentView(R.layout.activity_chat_page);
         messages = new ArrayList<>();
         messages.add(new message(1,"hi", new Date(),true));
