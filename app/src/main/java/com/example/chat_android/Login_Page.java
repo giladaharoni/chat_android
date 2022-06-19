@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import APIservice.WebService;
+
 public class Login_Page extends AppCompatActivity {
 
+    private WebService service;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        service = new WebService();
         setContentView(R.layout.activity_main);
         Button login = findViewById(R.id.login_buttton);
         TextView nickname = findViewById(R.id.nickname);
@@ -20,8 +24,11 @@ public class Login_Page extends AppCompatActivity {
         Button registerLink = findViewById(R.id.register_link);
 
         login.setOnClickListener(v->{
-            Intent i = new Intent(this, Converstaions_List.class);
-            startActivity(i);
+            if (service.login("didi","1")) {
+                Intent i = new Intent(this, Converstaions_List.class);
+                startActivity(i);
+            }
+
 
         });
         registerLink.setOnClickListener(v->{
