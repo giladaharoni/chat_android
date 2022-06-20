@@ -24,7 +24,7 @@ public class Chat_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        contact = new contact((String) i.getExtras().get("id"),(String) i.getExtras().get("name"),"","",(Date) i.getExtras().get("last_date"));
+        contact = new contact((String) i.getExtras().get("id"),(String) i.getExtras().get("name"),"","", (String)i.getExtras().get("last_date"));
         setContentView(R.layout.activity_chat_page);
         messages = new ArrayList<>();
         messages.add(new message(1,"hi", new Date(),true));
@@ -33,9 +33,7 @@ public class Chat_Page extends AppCompatActivity {
         TextView name = findViewById(R.id.Name_contact_chat_page);
         name.setText(contact.getName());
         TextView date = findViewById(R.id.lastseen_chat_page);
-        String pattern = " HH:mm";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        date.setText(simpleDateFormat.format(contact.getLastDate()));
+        date.setText(contact.getLastDate());
         RecyclerView lstMessage = findViewById(R.id.messages);
         final message_adapter message_adapter = new message_adapter(this);
         lstMessage.setAdapter(message_adapter);

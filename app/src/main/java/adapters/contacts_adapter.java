@@ -44,12 +44,10 @@ public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.cont
     @Override
     public void onBindViewHolder(@NonNull contacts_adapter.contactsViewHolder holder, int position) {
         if(contacts != null) {
-            String pattern = " HH:mm";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
             final contact current = contacts.get(position);
             holder.lastMessage.setText(current.getLast());
-            holder.time.setText(simpleDateFormat.format(current.getLastDate()));
+            holder.time.setText(current.getLastDate());
             holder.name.setText(current.getName());
             holder.image.setImageResource(R.drawable.ic_launcher_background);
 

@@ -1,5 +1,6 @@
 package viewmodels;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 @Entity
 public class contact {
-    @PrimaryKey(autoGenerate = true)
-    private int ida;
+    @PrimaryKey
+    @NonNull
     private String id;
     private String name;
     private String server;
@@ -25,8 +26,7 @@ public class contact {
         this.lastDate = simpleDateFormat.format(lastDate);
     }
 
-    public contact(int ida, String id, String name, String server, String last, String lastDate) {
-        this.ida = ida;
+    public contact(String id, String name, String server, String last, String lastDate) {
 
         this.id = id;
         this.name = name;
@@ -74,13 +74,5 @@ public class contact {
 
     public String getLastDate() {
         return lastDate;
-    }
-
-    public int getIda() {
-        return ida;
-    }
-
-    public void setIda(int ida) {
-        this.ida = ida;
     }
 }

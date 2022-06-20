@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import APIservice.MyApplication;
 import DAO.AppDb;
 import DAO.contactDao;
@@ -23,7 +25,7 @@ public class Add_Contact extends AppCompatActivity {
         TextView contact_form = findViewById(R.id.addContact_nickname);
         add_contact.setOnClickListener(v ->{
             //call from the server - later. get the data about him.
-            contact c = new contact("0", (String) contact_form.getText(),"","",null);
+            contact c = new contact("0", (String) contact_form.getText(),"","", (Date) null);
             AppDb db = Room.databaseBuilder(MyApplication.context,AppDb.class,"db").build();
             contactDao dao = db.contactDao();
             dao.insert(c);
