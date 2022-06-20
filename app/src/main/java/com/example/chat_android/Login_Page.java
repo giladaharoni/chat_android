@@ -16,12 +16,7 @@ public class Login_Page extends AppCompatActivity {
 
     private WebService service;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.setting,menu);
-        return true;
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,5 +41,11 @@ public class Login_Page extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting,menu);
+        return true;
     }
 }

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 
 public class Register_Page extends AppCompatActivity {
@@ -23,5 +25,10 @@ public class Register_Page extends AppCompatActivity {
             Intent i = new Intent(this, Login_Page.class);
             startActivity(i);
         });
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting,menu);
+        return true;
     }
 }
