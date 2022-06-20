@@ -9,6 +9,8 @@ import com.example.chat_android.R;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,12 +25,38 @@ public class WebService {
     SessionManager manager;
 
     public WebService() {
-        retrofit = new Retrofit.Builder()
+//        manager = new SessionManager();
+//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .addInterceptor(interceptor)
+//                .build();
+//        retrofit = new Retrofit.Builder()
+//                .baseUrl(MyApplication.context.getString(R.string.base_url))
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+
+
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+// add your other interceptors …
+
+// add logging as last interceptor
+        httpClient.addInterceptor(logging);  // <-- this is the important line!
+
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
                 .build();
         webApi = retrofit.create(webApi.class);
-        manager = new SessionManager();
+
+
+
     }
 
     public void get(){

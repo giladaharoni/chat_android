@@ -2,6 +2,7 @@ package APIservice;
 
 
 
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,7 +25,7 @@ public interface webApi {
     Call<List<message>> getMessages(@Path("id") String id);
 
     @POST("/api/contacts/{id}/messages")
-    Call<Void> addMessages(@Path("id") String id,@Body message m);
+    Call<Void> addMessages(@Path("id") String id, @Body message m);
 
     @POST("/api/User")
     Call<Void> login(@Query("username") String username, @Query("password") String password);
