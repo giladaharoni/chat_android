@@ -25,8 +25,8 @@ public class Login_Page extends AppCompatActivity {
 
         login.setOnClickListener(v->{
             if (service.login("do","1", this)) {
-                Intent i = new Intent(this, Converstaions_List.class);
-                startActivity(i);
+                //Intent i = new Intent(this, Converstaions_List.class);
+                //startActivity(i);
             }
 
         });

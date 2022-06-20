@@ -1,5 +1,6 @@
 package com.example.chat_android;
 
+import APIservice.WebService;
 import adapters.contacts_adapter;
 import adapters.message_adapter;
 import androidx.annotation.Nullable;
@@ -45,6 +46,8 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
 
     @Override
     public void onContactClick(int position) {
+        //WebService service = new WebService();
+       // service.get();
 
         Intent intent = new Intent(this,Chat_Page.class);
         contact con =contacts.get(position);

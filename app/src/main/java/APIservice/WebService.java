@@ -1,15 +1,27 @@
 package APIservice;
 
+import static APIservice.MyApplication.context;
+
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.chat_android.Converstaions_List;
 import com.example.chat_android.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.List;
 
+import okhttp3.CookieJar;
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
+import okhttp3.internal.JavaNetCookieJar;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,18 +50,20 @@ public class WebService {
 
 
 
+
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 // set your desired log level
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        CookieManager cookieHandler = new CookieManager();
+        cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(cookieHandler));
 // add your other interceptors …
 
 // add logging as last interceptor
         httpClient.addInterceptor(logging);  // <-- this is the important line!
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.base_url))
+                .baseUrl(context.getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
@@ -75,6 +89,8 @@ public class WebService {
         });
     }
 
+
+
     public boolean login(String name, String password, Context login){
         // call -> async
         Call<Void> call = webApi.login(name, password);
@@ -85,9 +101,22 @@ public class WebService {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 //when the request http succeed
-                Log.d(TAG, "onResponse: "+response.message());
-                Intent i = new Intent(login, Converstaions_List.class);
-                login.startActivity(i);
+                Log.d(TAG, "here we go sfsdfgd  "+ response.body());
+
+
+                if (response.isSuccessful()){
+                    Headers token = response.headers();
+
+
+
+                    Intent i = new Intent(login, Converstaions_List.class);
+                    login.startActivity(i);
+                }
+
+
+
+
+
                 isLogin[0] = true;
             }
 
