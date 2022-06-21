@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.chat_android.Converstaions_List;
 import com.example.chat_android.R;
 
@@ -85,6 +87,23 @@ public class WebService {
 
     }
 
+    public List<contact> getContacts(){
+        final List<contact>[] ref = new List[]{null};
+        Call<List<contact>> contacts = webApi.getContacts();
+        contacts.enqueue(new Callback<List<contact>>() {
+            @Override
+            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
+                ref[0] = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<contact>> call, Throwable t) {
+
+            }
+        });
+        return ref[0];
+    }
+
     public void get(){
         Call<List<contact>> call = webApi.getContacts();
         call.enqueue(new Callback<List<contact>>() {
@@ -135,10 +154,8 @@ public class WebService {
                 Log.d(TAG, "here we go sfsdfgd  "+ response.body().getToken());
 
 
-                if (response.isSuccessful()){
-
-
-
+                if (response.body().getToken()!="ERROR"){
+                    manager.saveAuthToken(response.body().getToken());
 
 
 
