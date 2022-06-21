@@ -30,10 +30,15 @@ public interface webApi {
     @POST("/api/User")
     Call<Void> login(@Query("username") String username, @Query("password") String password);
 
+    @GET("/string")
+    Call<LoginResponse> login_String(@Query("username") String username, @Query("password") String password);
+
+
     @POST("/register")
     Call<Void> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password);
 
-
+    @GET("/WeatherForecast")
+    Call <String> tryout();
 
 
 

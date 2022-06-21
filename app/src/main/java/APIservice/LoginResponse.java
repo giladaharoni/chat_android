@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
     @SerializedName("token")
-    private String token;
+    private String Token;
 
     public LoginResponse(String token){
-        this.token = token;
+        this.Token = token;
     }
 
     public String getToken() {
-        return token;
+        return Token;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.Token = token;
     }
 }

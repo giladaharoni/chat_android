@@ -25,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 import viewmodels.contact;
 
 
@@ -36,40 +37,49 @@ public class WebService {
     public WebService() {
         manager = new SessionManager();
 
-
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-// set your desired log level
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        CookieManager cookieHandler = new CookieManager();
-        cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(cookieHandler));
-// add your other interceptors …
-
-// add logging as last interceptor
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-
-                okhttp3.Response response = chain.proceed(original);
-                String authToken = "Bearer " + manager.fetchAuthToken();
-
-
-                Request request = original.newBuilder()
-                        .header("Authorization", authToken)
-                        .method(original.method(), original.body()).build();
-
-                return chain.proceed(request);
-            }
-        }).addInterceptor(logging);  // <-- this is the important line!
-
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(context.getString(R.string.base_url))
-                //.addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient.build())
+                .client(new OkHttpClient.Builder().build())
                 .build();
-        webApi = retrofit.create(webApi.class);
+        webApi = retrofit.create(APIservice.webApi.class);
+
+
+//
+//
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//// set your desired log level
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        CookieManager cookieHandler = new CookieManager();
+//        cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(cookieHandler));
+//// add your other interceptors …
+//
+//// add logging as last interceptor
+//        httpClient.addInterceptor(new Interceptor() {
+//            @Override
+//            public okhttp3.Response intercept(Chain chain) throws IOException {
+//                Request original = chain.request();
+//
+//                okhttp3.Response response = chain.proceed(original);
+//                String authToken = "Bearer " + manager.fetchAuthToken();
+//
+//
+//                Request request = original.newBuilder()
+//                        .header("Authorization", authToken)
+//                        .method(original.method(), original.body()).build();
+//
+//                return chain.proceed(request);
+//            }
+//        }).addInterceptor(logging);  // <-- this is the important line!
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(context.getString(R.string.base_url))
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(httpClient.build())
+//                .build();
+//        webApi = retrofit.create(webApi.class);
 
 
 
@@ -93,24 +103,41 @@ public class WebService {
 
 
 
+    public void tryout(){
+        Call<String> call = webApi.tryout();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("TAG", "onResponse: "+response);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("TAG", "onFailure: ");
+
+            }
+        });
+    }
+
     public boolean login(String name, String password, Context login){
         // call -> async
 
 
-        Call<Void> call = webApi.login(name, password);
+
+        Call<LoginResponse> call = webApi.login_String(name, password);
         final boolean[] isLogin = {false};
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<LoginResponse>() {
             private static final String TAG = "";
 
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 //when the request http succeed
-                Log.d(TAG, "here we go sfsdfgd  "+ response.raw());
+                Log.d(TAG, "here we go sfsdfgd  "+ response.body().getToken());
 
 
                 if (response.isSuccessful()){
 
-                    Headers token = response.headers();
+
 
 
 
@@ -127,7 +154,7 @@ public class WebService {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
                 //when the request http failed
                 Log.d(TAG, "onResponse: ");
                 isLogin[0] = false;

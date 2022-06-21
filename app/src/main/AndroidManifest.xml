@@ -24,7 +24,9 @@
             android:exported="false" />
         <activity
             android:name=".Chat_Page"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"
+        />
         <activity
             android:name=".Register_Page"
             android:exported="false" />
