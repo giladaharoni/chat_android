@@ -14,6 +14,7 @@ import com.example.chat_android.R;
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -87,25 +88,51 @@ public class WebService {
 
     }
 
-    public List<contact> getContacts(){
-        final List<contact>[] ref = new List[]{null};
-        Call<List<contact>> contacts = webApi.getContacts();
-        contacts.enqueue(new Callback<List<contact>>() {
+    public void addContact(String name){
+
+        webApi.postContact(new ContactPost(name,"0",""),"Bearer "+manager.fetchAuthToken()).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
-                ref[0] = response.body();
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()){
+                    Log.d("TAG", "onResponse: succed");
+                }
+
             }
 
             @Override
-            public void onFailure(Call<List<contact>> call, Throwable t) {
-
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("TAG", "onResponse: failed");
             }
         });
-        return ref[0];
+
+
+    }
+
+    public List<contact> getContacts(){
+        final List<contact>[] ref = new List[]{null};
+        Call<List<contact>> contacts = webApi.getContacts("Bearer "+manager.fetchAuthToken());
+        try{
+            return contacts.execute().body();
+        } catch (Throwable t){
+            return new ArrayList<contact>();
+        }
+
+//        contacts.enqueue(new Callback<List<contact>>() {
+//            @Override
+//            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
+//                ref[0] = response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<contact>> call, Throwable t) {
+//
+//            }
+//        });
+//        return ref[0];
     }
 
     public void get(){
-        Call<List<contact>> call = webApi.getContacts();
+        Call<List<contact>> call = webApi.getContacts("Bearer "+manager.fetchAuthToken());
         call.enqueue(new Callback<List<contact>>() {
             @Override
             public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
@@ -122,21 +149,7 @@ public class WebService {
 
 
 
-    public void tryout(){
-        Call<String> call = webApi.tryout();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("TAG", "onResponse: "+response);
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("TAG", "onFailure: ");
-
-            }
-        });
-    }
 
     public boolean login(String name, String password, Context login){
         // call -> async
