@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/setting"
+
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Item 1"
-        app:showAsAction="ifRoom"/>
+        android:title="settings"
+        app:showAsAction="ifRoom">
+
+
+    </item>
     <item android:id="@+id/setting1"
-        android:title="Item 1"
-        app:showAsAction="never"/>
+        android:title="choose mode"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/darkMode"
+                android:title="dark mode" />
+            <item android:id="@+id/brightMode"
+                android:title="bright mode" />
+        </menu>
+
+    </item>
     <item android:id="@+id/setting2"
         android:title="Item 2"
         app:showAsAction="never"/>

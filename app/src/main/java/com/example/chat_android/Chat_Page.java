@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -18,8 +21,11 @@ import viewmodels.contact;
 import viewmodels.message;
 
 public class Chat_Page extends AppCompatActivity {
+    private static final String TAG = "";
     public List<message> messages;
     private viewmodels.contact contact;
+    EditText sendBox;
+    Button send;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,18 @@ public class Chat_Page extends AppCompatActivity {
         lstMessage.setAdapter(message_adapter);
         lstMessage.setLayoutManager(new LinearLayoutManager(this));
         message_adapter.setMessages(messages);
+        send = findViewById(R.id.sendButton);
+        sendBox = findViewById(R.id.messageToSend);
+        send.setOnClickListener(v->{
+            if (!sendBox.getText().toString().equals("")){
+            } else {
+                String message = sendBox.getText().toString();
+                Log.d(TAG, "onCreate: "+message);
+                sendBox.setText("");
+
+            }
+        });
+
 
     }
 }
