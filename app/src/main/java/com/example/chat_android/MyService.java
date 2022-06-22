@@ -17,6 +17,8 @@ import java.security.Provider;
 public class MyService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage){
+        //check where we are in app -> which acitivity
+        //refresh the activity.
 
         try{
             String notification_title= remoteMessage.getNotification().getTitle();

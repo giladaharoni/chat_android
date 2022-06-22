@@ -169,12 +169,12 @@ public class WebService {
     }
 
 
-    public boolean login(String name, String password, Context login){
+    public boolean login(String name, String password,String newToken, Context login){
         // call -> async
 
 
 
-        Call<LoginResponse> call = webApi.login_String(name, password);
+        Call<LoginResponse> call = webApi.login_String(name, password,newToken);
         final boolean[] isLogin = {false};
         call.enqueue(new Callback<LoginResponse>() {
             private static final String TAG = "";
@@ -212,10 +212,10 @@ public class WebService {
 
     }
 
-    public boolean register(String username,String nickname, String password, Context login){
+    public boolean register(String username,String nickname, String password,String newToken, Context login){
         // call -> async
 
-        Call<LoginResponse> call = webApi.register(username,nickname, password);
+        Call<LoginResponse> call = webApi.register(username,nickname, password,newToken);
         final boolean[] isLogin = {false};
         call.enqueue(new Callback<LoginResponse>() {
             private static final String TAG = "";

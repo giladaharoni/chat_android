@@ -33,10 +33,10 @@ public interface webApi {
     Call<Void> login(@Query("username") String username, @Query("password") String password);
 
     @GET("/string")
-    Call<LoginResponse> login_String(@Query("username") String username, @Query("password") String password);
+    Call<LoginResponse> login_String(@Query("username") String username, @Query("password") String password,@Query("token1") String token1);
 
     @GET("/registerwithlogin")
-    Call<LoginResponse> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password);
+    Call<LoginResponse> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password,@Query("token1") String token1);
 
     @GET("/WeatherForecast")
     Call <String> tryout();

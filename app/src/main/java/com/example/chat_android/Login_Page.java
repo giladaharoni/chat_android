@@ -1,21 +1,23 @@
 package com.example.chat_android;
 
-import androidx.annotation.ContentView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.LiveData;
 
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import APIservice.WebService;
 
@@ -43,9 +45,15 @@ public class Login_Page extends AppCompatActivity {
         TextView nickname = findViewById(R.id.nickname);
         TextView password = findViewById(R.id.login_password);
         Button registerLink = findViewById(R.id.register_link);
+        final String[] newToken = new String[1];
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
+            newToken[0] = instanceIdResult.getToken();
+
+
+        });
 
         login.setOnClickListener(v->{
-            if (service.login("do","1", this)) {
+            if (service.login(nickname.getText().toString(),password.getText().toString(), newToken[0], this)) {
                // Intent i = new Intent(this, Converstaions_List.class);
               //  startActivity(i);
             }

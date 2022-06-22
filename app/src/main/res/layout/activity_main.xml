@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login_Page"
-    android:forceDarkAllowed="true">
+    android:padding="10dp"
+    android:background="#C5CAE9">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#E6E6E6"
+        app:cardBackgroundColor="#7986CB"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -51,6 +53,7 @@
                 android:id="@+id/login_buttton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:text="Login" />
 
             <Button

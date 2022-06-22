@@ -3,8 +3,11 @@ package com.example.chat_android;
 import APIservice.WebService;
 import adapters.contacts_adapter;
 import adapters.message_adapter;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,9 +16,11 @@ import viewmodels.contact;
 //import viewmodels.contact_viewmodel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -35,6 +40,7 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
     //private contact_viewmodel viewmodel_contacts;
     private List<contact> contacts;
     private FloatingActionButton addContact;
+    SharedPreferences sharedPreferences = null;
 
 
     @Override
@@ -47,10 +53,7 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
             Intent i = new Intent(this,Add_Contact.class);
             startActivity(i);
         });
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
-            String newToken = instanceIdResult.getToken();
-            Log.d(TAG, "the token is  "+newToken);
-        });
+        
 
 
         //viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
@@ -89,4 +92,48 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
         intent.putExtra("last_date",con.getLastDate());
         startActivity(intent);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.setting,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()){
+
+            case R.id.darkMode:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                // switchCompat.setChecked(true);
+                //imageView.setImageResource(R.drawable.night);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("night_mode",true);
+                editor.commit();
+
+
+                //Log.d(TAG, "onOptionsItemSelected: dark mode");
+                // setTheme(R.style.Theme_Chat_android);
+                //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                break;
+            case R.id.brightMode:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                //  switchCompat.setChecked(false);
+                // imageView.setImageResource(R.drawable.night);
+                SharedPreferences.Editor editorr = sharedPreferences.edit();
+                editorr.putBoolean("night_mode",false);
+                editorr.commit();
+
+                //Log.d(TAG, "onOptionsItemSelected: bright mode");
+                //setTheme(R.style.Theme_Chat_android_Night);
+                // AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            default: return super.onOptionsItemSelected(item);
+
+        }
+        return true;
+    }
+
 }

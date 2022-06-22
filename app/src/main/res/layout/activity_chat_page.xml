@@ -30,6 +30,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
+                android:background="#7986CB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -58,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="590dp"
             android:layout_gravity="end"
-            android:background="#F3F3F3">
+            android:background="#C5CAE9">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messages"

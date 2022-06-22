@@ -2,18 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="50dp"
     android:layout_marginBottom="6dp">
 
     <LinearLayout
         android:id="@+id/messageSent"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginEnd="50dp"
 
         android:background="@drawable/rounded_corner"
         android:backgroundTint="#878787"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp"
         android:shadowColor="@color/black"
         android:shadowRadius="100"

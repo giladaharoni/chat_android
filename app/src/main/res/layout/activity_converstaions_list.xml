@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C5CAE9"
     tools:context=".Converstaions_List">
 
     <RelativeLayout
@@ -27,13 +28,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/contacts"
-                android:layout_marginBottom="6dp"
-
-                android:background="#FFFFFF"
                 android:layout_width="match_parent"
+
                 android:layout_height="60dp"
-                android:minHeight="590dp"
-                />
+
+                android:layout_marginBottom="6dp"
+                android:background="#C5CAE9"
+                android:minHeight="590dp" />
 
 
         </ScrollView>

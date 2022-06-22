@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C0AAFD"
+    android:background="#C5CAE9"
     tools:context=".Register_Page">
 
     <androidx.cardview.widget.CardView
@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:background="#7986CB"
             android:layout_width="match_parent"
             android:layout_height="423dp"
             android:orientation="vertical">
