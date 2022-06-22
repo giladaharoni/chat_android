@@ -25,7 +25,7 @@ import viewmodels.message;
 
 public class Chat_Page extends AppCompatActivity {
     private static final String TAG = "";
-    public List<message> messages;
+
     private viewmodels.contact contact;
     message_adapter message_adapter;
     EditText sendBox;
@@ -39,7 +39,7 @@ public class Chat_Page extends AppCompatActivity {
         String lastdate = (String) i.getExtras().get("last_date");
         contact = new contact(id,cname,"","", lastdate);
         setContentView(R.layout.activity_chat_page);
-        RecyclerView lstContact = findViewById(R.id.contacts);
+        RecyclerView lstContact = findViewById(R.id.messages);
         WebService service = new WebService();
 
         message_adapter = new message_adapter(this);
@@ -53,18 +53,16 @@ public class Chat_Page extends AppCompatActivity {
         TextView date = findViewById(R.id.lastseen_chat_page);
         date.setText(contact.getLastDate());
         RecyclerView lstMessage = findViewById(R.id.messages);
-        message_adapter message_adapter = new message_adapter(this);
         lstMessage.setAdapter(message_adapter);
         lstMessage.setLayoutManager(new LinearLayoutManager(this));
-        message_adapter.setMessages(messages);
         send = findViewById(R.id.sendButton);
         sendBox = findViewById(R.id.messageToSend);
         send.setOnClickListener(v->{
             if (sendBox.getText().toString().equals("")){
             } else {
                 String message = sendBox.getText().toString();
-                messages.add(new message(3,message,new Date(),true));
-                message_adapter.notifyDataSetChanged();
+                service.postMessage(new message(0,message,new Date(),true),id);
+                service.getMessage(message_adapter,id);
                 Log.d(TAG, "onCreate: "+message);
                 sendBox.setText("");
 
