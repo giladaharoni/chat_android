@@ -16,17 +16,17 @@ import viewmodels.contact;
 import viewmodels.message;
 
 public interface webApi {
-    @GET("/api/Contacts")
+    @GET("/Contacts")
     Call<List<contact>> getContacts(@Header("Authorization") String authHeader);
 
-    @POST("/api/Contacts")
+    @POST("/Contacts")
     Call<Void> postContact(@Body ContactPost p,@Header("Authorization") String authHeader);
 
 
-    @GET("/api/Contacts/{id}/messages")
+    @GET("/Contacts/{id}/messages")
     Call<List<message>> getMessages(@Path("id") String id,@Header("Authorization") String authHeader);
 
-    @POST("/api/Contacts/{id}/messages")
+    @POST("/Contacts/{id}/messages")
     Call<Void> addMessages(@Path("id") String id, @Body message m,@Header("Authorization") String authHeader);
 
     @POST("/api/User")
@@ -34,7 +34,6 @@ public interface webApi {
 
     @GET("/string")
     Call<LoginResponse> login_String(@Query("username") String username, @Query("password") String password);
-
 
     @POST("/register")
     Call<Void> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password);

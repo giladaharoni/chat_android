@@ -33,27 +33,27 @@ import viewmodels.contact;
 
 
 public class WebService {
-    Retrofit retrofit;
-    webApi webApi;
+    static Retrofit retrofit;
+    static webApi webApi;
     SessionManager manager;
 
     public WebService() {
         manager = new SessionManager();
+        if(retrofit==null) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            // set your desired log level
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        retrofit = new Retrofit.Builder()
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(context.getString(R.string.base_url))
-                .client(new OkHttpClient.Builder().build())
-                .build();
-        webApi = retrofit.create(APIservice.webApi.class);
+            retrofit = new Retrofit.Builder()
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(context.getString(R.string.base_url))
+                    .client(new OkHttpClient.Builder().addInterceptor(logging).build())
+                    .build();
+            webApi = retrofit.create(APIservice.webApi.class);
+        }
 
 
-//
-//
-//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//// set your desired log level
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        CookieManager cookieHandler = new CookieManager();
 //        cookieHandler.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
 //        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(cookieHandler));
@@ -96,7 +96,6 @@ public class WebService {
                 if (response.isSuccessful()){
                     Log.d("TAG", "onResponse: succed");
                 }
-
             }
 
             @Override
@@ -111,24 +110,24 @@ public class WebService {
     public List<contact> getContacts(){
         final List<contact>[] ref = new List[]{null};
         Call<List<contact>> contacts = webApi.getContacts("Bearer "+manager.fetchAuthToken());
-        try{
-            return contacts.execute().body();
-        } catch (Throwable t){
-            return new ArrayList<contact>();
-        }
+//        try{
+//            return contacts.execute().body();
+//        } catch (Throwable t){
+//            return new ArrayList<contact>();
+//        }
 
-//        contacts.enqueue(new Callback<List<contact>>() {
-//            @Override
-//            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
-//                ref[0] = response.body();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<contact>> call, Throwable t) {
-//
-//            }
-//        });
-//        return ref[0];
+        contacts.enqueue(new Callback<List<contact>>() {
+            @Override
+            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
+                ref[0] = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<contact>> call, Throwable t) {
+
+            }
+        });
+        return ref[0];
     }
 
     public void get(){
@@ -167,15 +166,13 @@ public class WebService {
                 Log.d(TAG, "here we go sfsdfgd  "+ response.body().getToken());
 
 
-                if (response.body().getToken()!="ERROR"){
+                if (!response.body().getToken().equals("ERROR")){
                     manager.saveAuthToken(response.body().getToken());
-
 
 
                     Intent i = new Intent(login, Converstaions_List.class);
                     login.startActivity(i);
                 }
-
 
 
 
