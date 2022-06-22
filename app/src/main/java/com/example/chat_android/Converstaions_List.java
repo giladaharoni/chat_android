@@ -19,7 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +47,10 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
             Intent i = new Intent(this,Add_Contact.class);
             startActivity(i);
         });
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
+            String newToken = instanceIdResult.getToken();
+            Log.d(TAG, "the token is  "+newToken);
+        });
 
 
         //viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
@@ -60,6 +67,14 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
         service.getContacts(contacts_adapter);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        WebService service = new WebService();
+        service.getContacts(contacts_adapter);
+
+    }
 
     @Override
     public void onContactClick(int position) {

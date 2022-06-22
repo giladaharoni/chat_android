@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Button;
+import android.widget.TextView;
+
+import APIservice.WebService;
 
 public class Register_Page extends AppCompatActivity {
 
@@ -15,10 +18,21 @@ public class Register_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
         Button register = findViewById(R.id.login_buttton);
+        TextView regis_nickname = findViewById(R.id.regis_nickname);
+        TextView email = findViewById(R.id.email);
+        TextView loginPassword = findViewById(R.id.login_password);
+        TextView confirm = findViewById(R.id.regis_confirm);
+        WebService service = new WebService();
         register.setOnClickListener(v->{
+            if (!confirm.getText().toString().equals(loginPassword.getText().toString())){
+                return;
+            }
+            service.register(email.getText().toString(),regis_nickname.getText().toString(),loginPassword.getText().toString(),this);
+
             //validate all the parameters;
-            Intent i = new Intent(this, Converstaions_List.class);
-            startActivity(i);
+            //Intent i = new Intent(this, Converstaions_List.class);
+           // startActivity(i);
+
         });
         Button switchLogin = findViewById(R.id.register_link);
         switchLogin.setOnClickListener(v->{

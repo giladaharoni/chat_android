@@ -27,7 +27,7 @@ public interface webApi {
     Call<List<message>> getMessages(@Path("id") String id,@Header("Authorization") String authHeader);
 
     @POST("/Contacts/{id}/messages")
-    Call<Void> addMessages(@Path("id") String id, @Body message m,@Header("Authorization") String authHeader);
+    Call<Void> addMessages(@Path("id") String id,  @Body messagePost m,@Header("Authorization") String authHeader);
 
     @POST("/api/User")
     Call<Void> login(@Query("username") String username, @Query("password") String password);
@@ -35,8 +35,8 @@ public interface webApi {
     @GET("/string")
     Call<LoginResponse> login_String(@Query("username") String username, @Query("password") String password);
 
-    @POST("/register")
-    Call<Void> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password);
+    @GET("/registerwithlogin")
+    Call<LoginResponse> register(@Query("username") String username,@Query("nickname") String nickname,@Query("password") String password);
 
     @GET("/WeatherForecast")
     Call <String> tryout();

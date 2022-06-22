@@ -33,12 +33,13 @@ public class Chat_Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat_page);
         Intent i = getIntent();
         String id = (String) i.getExtras().get("id");
         String cname = (String) i.getExtras().get("name");
         String lastdate = (String) i.getExtras().get("last_date");
         contact = new contact(id,cname,"","", lastdate);
-        setContentView(R.layout.activity_chat_page);
+
         RecyclerView lstContact = findViewById(R.id.messages);
         WebService service = new WebService();
 
@@ -61,8 +62,8 @@ public class Chat_Page extends AppCompatActivity {
             if (sendBox.getText().toString().equals("")){
             } else {
                 String message = sendBox.getText().toString();
-                service.postMessage(new message(0,message,new Date(),true),id);
-                service.getMessage(message_adapter,id);
+                service.postMessage(message,id, message_adapter);
+
                 Log.d(TAG, "onCreate: "+message);
                 sendBox.setText("");
 

@@ -152,11 +152,12 @@ public class WebService {
             }
         }));
     }
-    public void postMessage(message mes,String id){
-        Call<Void> call = webApi.addMessages(id,mes,"Bearer "+manager.fetchAuthToken());
+    public void postMessage(String mes,String id, message_adapter adapter){
+        Call<Void> call = webApi.addMessages(id,new messagePost(mes),"Bearer "+manager.fetchAuthToken());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                getMessage(adapter,id);
 
             }
 
@@ -168,14 +169,53 @@ public class WebService {
     }
 
 
-
-
     public boolean login(String name, String password, Context login){
         // call -> async
 
 
 
         Call<LoginResponse> call = webApi.login_String(name, password);
+        final boolean[] isLogin = {false};
+        call.enqueue(new Callback<LoginResponse>() {
+            private static final String TAG = "";
+
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                //when the request http succeed
+                Log.d(TAG, "here we go sfsdfgd  "+ response.body().getToken());
+
+
+                if (!response.body().getToken().equals("ERROR")){
+                    manager.saveAuthToken(response.body().getToken());
+
+
+                    Intent i = new Intent(login, Converstaions_List.class);
+                    login.startActivity(i);
+                }
+
+
+
+
+                isLogin[0] = true;
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                //when the request http failed
+                Log.d(TAG, "onResponse: ");
+                isLogin[0] = false;
+            }
+        });
+        return isLogin[0];
+
+
+
+    }
+
+    public boolean register(String username,String nickname, String password, Context login){
+        // call -> async
+
+        Call<LoginResponse> call = webApi.register(username,nickname, password);
         final boolean[] isLogin = {false};
         call.enqueue(new Callback<LoginResponse>() {
             private static final String TAG = "";
