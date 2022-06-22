@@ -17,6 +17,8 @@ import java.net.CookiePolicy;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.contacts_adapter;
+import adapters.message_adapter;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -30,6 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import viewmodels.contact;
+import viewmodels.message;
 
 
 public class WebService {
@@ -107,8 +110,9 @@ public class WebService {
 
     }
 
-    public List<contact> getContacts(){
+    public void getContacts(contacts_adapter adapter){
         final List<contact>[] ref = new List[]{null};
+        contact c;
         Call<List<contact>> contacts = webApi.getContacts("Bearer "+manager.fetchAuthToken());
 //        try{
 //            return contacts.execute().body();
@@ -119,7 +123,9 @@ public class WebService {
         contacts.enqueue(new Callback<List<contact>>() {
             @Override
             public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
-                ref[0] = response.body();
+                adapter.setContacts(response.body());
+                adapter.notifyDataSetChanged();
+                //response.body().get(0).getId();
             }
 
             @Override
@@ -127,25 +133,39 @@ public class WebService {
 
             }
         });
-        return ref[0];
+        return;
     }
 
-    public void get(){
-        Call<List<contact>> call = webApi.getContacts("Bearer "+manager.fetchAuthToken());
-        call.enqueue(new Callback<List<contact>>() {
-            @Override
-            public void onResponse(Call<List<contact>> call, Response<List<contact>> response) {
 
-                List<contact> contacts= response.body();
+    public void getMessage(message_adapter adapter,String id) {
+        Call<List<message>> call = webApi.getMessages(id,"Bearer "+manager.fetchAuthToken());
+        call.enqueue((new Callback<List<message>>() {
+            @Override
+            public void onResponse(Call<List<message>> call, Response<List<message>> response) {
+                adapter.setMessages(response.body());
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<List<contact>> call, Throwable t) {
+            public void onFailure(Call<List<message>> call, Throwable t) {
+
+            }
+        }));
+    }
+    public void postMessage(message mes,String id){
+        Call<Void> call = webApi.addMessages(id,mes,"Bearer "+manager.fetchAuthToken());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
     }
-
 
 
 

@@ -41,6 +41,10 @@ public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.cont
         return new contactsViewHolder(inflater.inflate(R.layout.contact_pre_view,parent,false),listener);
     }
 
+    public List<contact> getContacts() {
+        return contacts;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull contacts_adapter.contactsViewHolder holder, int position) {
         if(contacts != null) {

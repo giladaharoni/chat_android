@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_weight="1"
+                android:textColor="@color/black"
                 android:text="contact name"
                 android:textSize="20dp" />
 
@@ -43,6 +44,7 @@
                     android:layout_width="121dp"
                     android:layout_marginTop="33dp"
                     android:layout_height="match_parent"
+                    android:textColor="@color/black"
                     android:text="last_message"
                     tools:ignore="last_message_conv" />
 
@@ -50,7 +52,7 @@
                     android:id="@+id/time_conv"
                     android:layout_width="wrap_content"
                     android:layout_marginTop="23dp"
-
+                    android:textColor="@color/black"
                     android:layout_height="43dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"

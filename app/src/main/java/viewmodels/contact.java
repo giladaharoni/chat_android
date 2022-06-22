@@ -1,11 +1,18 @@
 package viewmodels;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 @Entity
 public class contact {
     @PrimaryKey
@@ -27,12 +34,14 @@ public class contact {
     }
 
     public contact(String id, String name, String server, String last, String lastDate) {
-
+        String pattern = " HH:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         this.id = id;
         this.name = name;
         this.server = server;
         this.last = last;
-        this.lastDate = lastDate;
+        this.lastDate = "";
+
     }
 
 

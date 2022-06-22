@@ -27,11 +27,12 @@ import java.util.List;
 import java.util.Observer;
 
 public class Converstaions_List extends AppCompatActivity implements contacts_adapter.OnContactClickListener {
-
+    private  contacts_adapter contacts_adapter;
     private static final String TAG = "conv:";
     //private contact_viewmodel viewmodel_contacts;
     private List<contact> contacts;
     private FloatingActionButton addContact;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +47,17 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
 
 
         //viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
-        contacts = service.getContacts();
+
       //  contacts = new ArrayList<contact>();
        // contacts.add(new contact("33", "dana", "2", "lalalalla", new Date()));
        // contacts.add(new contact("34", "didi", "5", "kkkkk", new Date()));
 
         RecyclerView lstContact = findViewById(R.id.contacts);
-        final contacts_adapter contacts_adapter = new contacts_adapter(this,this);
+        contacts_adapter = new contacts_adapter(this,this);
         lstContact.setAdapter(contacts_adapter);
         lstContact.setLayoutManager(new LinearLayoutManager(this));
-        contacts_adapter.setContacts(contacts);
+        //contacts_adapter.setContacts(contacts);
+        service.getContacts(contacts_adapter);
     }
 
 
@@ -65,7 +67,7 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
        // service.get();
 
         Intent intent = new Intent(this,Chat_Page.class);
-        contact con =contacts.get(position);
+        contact con = contacts_adapter.getContacts().get(position);
         //Log.d(TAG, "onContactClick: "+ID);
         intent.putExtra("id",con.getId());
         intent.putExtra("name",con.getName());

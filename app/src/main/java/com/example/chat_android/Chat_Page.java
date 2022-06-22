@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import APIservice.WebService;
+import adapters.contacts_adapter;
 import adapters.message_adapter;
 import viewmodels.contact;
 import viewmodels.message;
@@ -32,12 +34,20 @@ public class Chat_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        contact = new contact((String) i.getExtras().get("id"),(String) i.getExtras().get("name"),"","", (String)i.getExtras().get("last_date"));
+        String id = (String) i.getExtras().get("id");
+        String cname = (String) i.getExtras().get("name");
+        String lastdate = (String) i.getExtras().get("last_date");
+        contact = new contact(id,cname,"","", lastdate);
         setContentView(R.layout.activity_chat_page);
-        messages = new ArrayList<>();
-        messages.add(new message(1,"hi", new Date(),true));
-        messages.add(new message(2,"hello", new Date(),false));
-        messages.add(new message(3,"hesd", new Date(),false));
+        RecyclerView lstContact = findViewById(R.id.contacts);
+        WebService service = new WebService();
+
+        message_adapter = new message_adapter(this);
+        lstContact.setAdapter(message_adapter);
+        lstContact.setLayoutManager(new LinearLayoutManager(this));
+        //contacts_adapter.setContacts(contacts);
+        service.getMessage(message_adapter,id);
+
         TextView name = findViewById(R.id.Name_contact_chat_page);
         name.setText(contact.getName());
         TextView date = findViewById(R.id.lastseen_chat_page);
