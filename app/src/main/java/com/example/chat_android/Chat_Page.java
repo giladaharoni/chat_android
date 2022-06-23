@@ -77,6 +77,7 @@ public class Chat_Page extends AppCompatActivity {
         lstMessage.setLayoutManager(new LinearLayoutManager(this));
         send = findViewById(R.id.sendButton);
         sendBox = findViewById(R.id.messageToSend);
+
         send.setOnClickListener(v->{
             if (sendBox.getText().toString().equals("")){
             } else {

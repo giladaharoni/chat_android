@@ -59,7 +59,7 @@ public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.cont
             holder.lastMessage.setText(current.getLast());
           //  holder.time.setText();
             holder.name.setText(current.getName());
-            holder.image.setImageResource(R.drawable.ic_launcher_background);
+            holder.image.setImageResource(R.drawable.contact_pic);
             String lastDate=current.getLastDate();
             String pattern = " HH:mm";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

@@ -20,9 +20,9 @@
 
             <ImageView
                 android:id="@+id/imageButton"
-                android:layout_width="162dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                android:src="@drawable/contact_pic"
                 android:background="@drawable/rounded_corner"
                 android:longClickable="false"
                 android:shape="ring"
@@ -30,6 +30,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
+
                 android:background="#7986CB"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
