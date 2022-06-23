@@ -32,7 +32,7 @@
         <activity
             android:name=".Chat_Page"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
         />
         <activity
             android:name=".Register_Page"

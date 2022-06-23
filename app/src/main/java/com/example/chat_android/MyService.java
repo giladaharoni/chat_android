@@ -22,6 +22,7 @@ public class MyService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage){
         //check where we are in app -> which acitivity
         //refresh the activity.
+        int i=1;
         notifi.notifiction_recieved();
 
 //        try{

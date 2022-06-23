@@ -57,16 +57,7 @@ public class Chat_Page extends AppCompatActivity {
         contact = new contact(id,cname,"","", "");
         Context t = this;
 
-        MyService.notifi.set_obj(new Notification_recieved_listener.on_notification_recieved() {
-            @Override
-            public void func_recieved() {
-                Intent j = new Intent(t, Chat_Page.class);
-                j.putExtra("id", id);
-                j.putExtra("name", cname);
-                j.putExtra("last_date", lastdate);
-                startActivity(j);
-            }
-        });
+
 
         RecyclerView lstContact = findViewById(R.id.messages);
         WebService service = new WebService();
@@ -95,6 +86,18 @@ public class Chat_Page extends AppCompatActivity {
                 Log.d(TAG, "onCreate: "+message);
                 sendBox.setText("");
 
+            }
+        });
+
+        MyService.notifi.set_obj(new Notification_recieved_listener.on_notification_recieved() {
+            @Override
+            public void func_recieved() {
+                service.getMessage(message_adapter,id);
+//                Intent j = new Intent(t, Chat_Page.class);
+//                j.putExtra("id", id);
+//                j.putExtra("name", cname);
+//                j.putExtra("last_date", lastdate);
+//                startActivity(j);
             }
         });
 

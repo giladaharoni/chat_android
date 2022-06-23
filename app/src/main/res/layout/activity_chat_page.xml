@@ -18,7 +18,7 @@
             android:background="#A6A1A1"
             android:orientation="horizontal">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imageButton"
                 android:layout_width="162dp"
                 android:layout_height="wrap_content"
@@ -55,43 +55,55 @@
 
         </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="590dp"
-            android:layout_gravity="end"
-            android:background="#C5CAE9">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/messages"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="590dp"
-                />
-        </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <EditText
-                android:id="@+id/messageToSend"
-                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:layout_gravity="end"
 
-            <Button
-                android:id="@+id/sendButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="send"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="20sp" />
-        </LinearLayout>
+
+                android:background="#C5CAE9">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/messages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="300dp" />
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#B5B5B5"
+
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/messageToSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="send"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 
 
