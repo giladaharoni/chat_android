@@ -9,6 +9,8 @@ import androidx.room.PrimaryKey;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -33,6 +35,7 @@ public class contact {
         this.lastDate = simpleDateFormat.format(lastDate);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public contact(String id, String name, String server, String last, String lastDate) {
         String pattern = " HH:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -40,8 +43,7 @@ public class contact {
         this.name = name;
         this.server = server;
         this.last = last;
-        this.lastDate = "";
-
+        this.lastDate = lastDate;
     }
 
 

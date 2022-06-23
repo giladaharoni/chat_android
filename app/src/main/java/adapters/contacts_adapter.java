@@ -2,6 +2,7 @@ package adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,13 @@ import android.widget.TextView;
 import com.example.chat_android.R;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 import viewmodels.contact;
@@ -45,17 +50,27 @@ public class contacts_adapter extends RecyclerView.Adapter<contacts_adapter.cont
         return contacts;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull contacts_adapter.contactsViewHolder holder, int position) {
         if(contacts != null) {
 
             final contact current = contacts.get(position);
             holder.lastMessage.setText(current.getLast());
-            holder.time.setText(current.getLastDate());
+          //  holder.time.setText();
             holder.name.setText(current.getName());
             holder.image.setImageResource(R.drawable.ic_launcher_background);
+            String lastDate=current.getLastDate();
+            String pattern = " HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy", Locale.ENGLISH);
+                LocalDate date = LocalDate.parse(lastDate, formatter);
+                lastDate = simpleDateFormat.format(date);
+                holder.time.setText(lastDate);
+            } catch(Throwable T){
 
-
+            }
         }
     }
 

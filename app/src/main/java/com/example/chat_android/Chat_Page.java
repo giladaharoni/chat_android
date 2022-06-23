@@ -1,6 +1,7 @@
 package com.example.chat_android;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,9 +21,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import APIservice.WebService;
 import adapters.contacts_adapter;
@@ -37,6 +42,7 @@ public class Chat_Page extends AppCompatActivity {
     EditText sendBox;
     Button send;
     SharedPreferences sharedPreferences = null;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,10 @@ public class Chat_Page extends AppCompatActivity {
         String id = (String) i.getExtras().get("id");
         String cname = (String) i.getExtras().get("name");
         String lastdate = (String) i.getExtras().get("last_date");
-        contact = new contact(id,cname,"","", lastdate);
+        String pattern = " HH:mm";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        contact = new contact(id,cname,"","", "");
+
 
         RecyclerView lstContact = findViewById(R.id.messages);
         WebService service = new WebService();
