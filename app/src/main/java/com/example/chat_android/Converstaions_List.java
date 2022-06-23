@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import viewmodels.contact;
 //import viewmodels.contact_viewmodel;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,8 +54,15 @@ public class Converstaions_List extends AppCompatActivity implements contacts_ad
             Intent i = new Intent(this,Add_Contact.class);
             startActivity(i);
         });
-        
+        Context t = this;
 
+        MyService.notifi.set_obj(new Notification_recieved_listener.on_notification_recieved() {
+            @Override
+            public void func_recieved() {
+                Intent j = new Intent(t, Converstaions_List.class);
+                startActivity(j);
+            }
+        });
 
         //viewmodel_contacts = new ViewModelProvider(this).get(contact_viewmodel.class);
 

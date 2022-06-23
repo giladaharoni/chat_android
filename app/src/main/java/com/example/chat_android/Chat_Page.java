@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
@@ -54,7 +55,18 @@ public class Chat_Page extends AppCompatActivity {
         String pattern = " HH:mm";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         contact = new contact(id,cname,"","", "");
+        Context t = this;
 
+        MyService.notifi.set_obj(new Notification_recieved_listener.on_notification_recieved() {
+            @Override
+            public void func_recieved() {
+                Intent j = new Intent(t, Chat_Page.class);
+                j.putExtra("id", id);
+                j.putExtra("name", cname);
+                j.putExtra("last_date", lastdate);
+                startActivity(j);
+            }
+        });
 
         RecyclerView lstContact = findViewById(R.id.messages);
         WebService service = new WebService();
